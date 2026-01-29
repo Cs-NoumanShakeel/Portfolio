@@ -2,10 +2,12 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Cpu } from 'lucide-react';
+import { isEmbedType } from '../utils/video';
 
 const ProjectCard = ({ project, index }) => {
     const navigate = useNavigate();
     const cardRef = useRef(null);
+    const useEmbed = project.videoType && isEmbedType(project.videoType);
 
     return (
         <motion.div
@@ -19,7 +21,16 @@ const ProjectCard = ({ project, index }) => {
         >
             {/* Media Container — bg-pitch prevents white flash before video/image loads */}
             <div className="relative aspect-video overflow-hidden bg-pitch">
-                {project.isVideo ? (
+                {useEmbed ? (
+                    <iframe
+                        src={project.video}
+                        title={project.title}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                    />
+                ) : project.isVideo ? (
                     <video
                         src={project.video}
                         autoPlay

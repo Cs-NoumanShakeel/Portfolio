@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Github, ArrowLeft, Cpu, Target, HelpCircle, CheckCircle, ExternalLink } from 'lucide-react';
+import { Github, ArrowLeft, Cpu, Target, HelpCircle, CheckCircle } from 'lucide-react';
 import { projects } from '../utils/projects';
 import { useEffect } from 'react';
+import { isEmbedType, embedSrc } from '../utils/video';
 
 const ProjectDetail = () => {
     const { id } = useParams();
@@ -71,7 +72,15 @@ const ProjectDetail = () => {
                         transition={{ duration: 1 }}
                         className="aspect-[21/9] rounded-[3rem] overflow-hidden glass-dark mb-32 border border-white/5 relative group"
                     >
-                        {project.isVideo ? (
+                        {project.videoType && isEmbedType(project.videoType) ? (
+                            <iframe
+                                src={embedSrc(project.video, { autoplay: true })}
+                                title={project.title}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                            />
+                        ) : project.isVideo ? (
                             <video
                                 src={project.video}
                                 autoPlay
@@ -86,7 +95,7 @@ const ProjectDetail = () => {
                                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
                             />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-pitch via-transparent to-transparent opacity-40"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-pitch via-transparent to-transparent opacity-40 pointer-events-none"></div>
                     </motion.div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
