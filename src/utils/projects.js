@@ -1,0 +1,80 @@
+export const projects = [
+    {
+        id: "gymfreak",
+        title: "GymFreak",
+        tech: ["React.js", "Django", "MediaPipe", "OpenCV"],
+        video: "/assets/project_videos/Gymfreak.mp4",
+        isVideo: true,
+        description: "An AI-driven fitness app using MediaPipe and OpenCV for real-time exercise pose analysis.",
+        fullDescription: "Developed an AI-driven fitness app using MediaPipe and OpenCV for real-time exercise pose analysis. Built a React.js frontend with Django REST backend, implementing FastDTW for movement comparison, JWT authentication, and interactive performance dashboards.",
+        purpose: "To provide users with real-time feedback on their exercise form to prevent injury and improve performance.",
+        problems: "Capturing and analyzing pose data in real-time with low latency was a major challenge.",
+        solutions: "Optimized the processing pipeline using threading and reduced input resolution for faster MediaPipe inference.",
+        github: "https://github.com/Cs-NoumanShakeel/GYMFREAK"
+    },
+    {
+        id: "ant-colony",
+        title: "Ant Colony Simulation",
+        tech: ["Python", "Neural Networks", "Genetic Algorithms", "Pygame"],
+        video: "/assets/project_videos/ant_colony.mp4",
+        isVideo: true,
+        description: "An ant colony simulation where ants learn to find food using pheromone trails and simple neural networks.",
+        fullDescription: "This project is an ant colony simulation where ants learn to find food using pheromone trails and simple neural networks. A genetic algorithm is used to evolve the ants over multiple generations so their behavior improves over time. Features real-time visualization of the environment, pheromone trails, and the best ant's neural network.",
+        purpose: "To explore the combination of agent-based simulation and bio-inspired AI algorithms.",
+        problems: "Balancing the exploration vs. exploitation trade-off in the evolution process.",
+        solutions: "Fine-tuned the genetic algorithm parameters and introduced elitism to preserve high-performing agents.",
+        github: "https://github.com/Cs-NoumanShakeel/ANTS_COLONY_SIMULATION_NEURAL_NETWORK"
+    },
+    {
+        id: "pyshooter",
+        title: "PyShooter AI Detection",
+        tech: ["Python", "YOLOv8", "Pygame", "OpenCV"],
+        video: "/assets/project_videos/pyshooter.mp4",
+        isVideo: true,
+        description: "A 2D side-scrolling shooter game enhanced with real-time AI object detection using YOLOv8.",
+        fullDescription: "A 2D side-scrolling shooter game enhanced with real-time AI object detection using YOLOv8. This project demonstrates how to integrate computer vision and machine learning into a game to create an intelligent assistant that helps players by detecting and alerting them about enemies and items.",
+        purpose: "To show how AI can be integrated into games for real-time assistance and enhanced gameplay.",
+        problems: "YOLO inference can be heavy for a real-time game environment.",
+        solutions: "Implemented multi-threading to run YOLO detection in the background, ensuring smooth gameplay without blocking the main loop.",
+        github: "https://github.com/Cs-NoumanShakeel/PyShooter_ObjectDetection"
+    },
+    {
+        id: "discoverspace",
+        title: "DiscoverSpace",
+        tech: ["React", "Django", "NASA API"],
+        video: "/assets/project_videos/discover_space.mp4",
+        isVideo: true,
+        description: "A space insight web application consuming public NASA APIs to display space-related data and insights.",
+        fullDescription: "A space insight web application built with a React frontend and Django backend, consuming public NASA APIs to display space-related data and insights. Features dynamic data fetching and clean visualization of astronomical events.",
+        purpose: "To provide an educational platform for exploring space data provided by NASA.",
+        problems: "Handling large amounts of image data from NASA APIs efficiently.",
+        solutions: "Implemented lazy loading and image caching to improve page load times.",
+        github: "https://github.com/Cs-NoumanShakeel/DiscoverSpace"
+    },
+    {
+        id: "parallel-rag",
+        title: "Parallel RAG & Embedding System",
+        tech: ["Python", "FastAPI", "React", "LangChain", "Hugging Face"],
+        video: "/assets/project_videos/parallel_embedding.mp4",
+        isVideo: true,
+        description: "Scalable RAG system featuring a parallel Producer-Worker pipeline for efficient document ingestion.",
+        fullDescription: "Collaborated with my team to develop a scalable RAG system featuring a parallel Producer-Worker pipeline for efficient document ingestion, using all-MiniLM-L6-v2 for vector embeddings and Hugging Face APIs for context-aware LLM inference.",
+        purpose: "To handle large-scale document embedding and retrieval for intelligent Q&A tasks.",
+        problems: "Bottlenecks in document ingestion during high load.",
+        solutions: "Developed a parallelized producer-worker architecture to distribute the embedding workload.",
+        github: "https://github.com/Cs-NoumanShakeel/ParallelEmbeddingSystem"
+    },
+    {
+        id: "becafe",
+        title: "BECAFE Ecommerce (MERN)",
+        tech: ["Node.js", "Express.js", "MongoDB", "React"],
+        video: "/assets/project_videos/becafe.mp4",
+        isVideo: true,
+        description: "A multi-phase ecommerce platform with modular routing, CRUD operations, and an admin panel.",
+        fullDescription: "Developed a multi-phase Express.js application, evolving from a simple site to a full e-commerce platform, with modular routes, CRUD operations, MongoDB integration, and a dedicated admin panel for product management.",
+        purpose: "To build a robust and scalable end-to-end ecommerce solution.",
+        problems: "Managing session state and authentication securely.",
+        solutions: "Used JWT for stateless authentication and implemented middleware for role-based access control.",
+        github: "https://github.com/Cs-NoumanShakeel/BECAFE-Ecommerce"
+    }
+];
