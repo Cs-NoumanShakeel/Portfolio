@@ -5,18 +5,16 @@ import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Move useScroll to target the container instead of window
+
+  // Use scrollYProgress on container for stable parallax
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ['start start', 'end start'],
   });
 
-  // Use scrollYProgress (0-1) instead of scrollY for more stability
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
@@ -32,29 +30,21 @@ const Hero = () => {
     visible: { scale: 1, opacity: 1, rotate: 0, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
-  // Fix image preloading
+  // Preload images
   useEffect(() => {
     const preloadImages = [
       'https://res.cloudinary.com/dw9dtsgdm/image/upload/v1769720242/background_otqv3z.jpg',
       'https://res.cloudinary.com/dw9dtsgdm/image/upload/v1769720239/profile_govxcr.jpg',
     ];
-    
+
     let loadedCount = 0;
     const totalImages = preloadImages.length;
-    
+
     preloadImages.forEach((src) => {
       const img = new Image();
-      img.onload = () => {
+      img.onload = img.onerror = () => {
         loadedCount++;
-        if (loadedCount === totalImages) {
-          setIsLoaded(true);
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === totalImages) {
-          setIsLoaded(true); // Still set loaded even if images fail
-        }
+        if (loadedCount === totalImages) setIsLoaded(true);
       };
       img.src = src;
     });
@@ -70,7 +60,6 @@ const Hero = () => {
         style={{ y: y1, opacity }}
         className="absolute inset-0 z-0 pointer-events-none will-change-transform"
       >
-        {/* Neon Blurs */}
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neon-blue/10 rounded-full blur-[80px] animate-pulse"></div>
         <div
           className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-neon-purple/10 rounded-full blur-[70px] animate-pulse"
@@ -81,10 +70,8 @@ const Hero = () => {
           style={{ animationDelay: '2s' }}
         ></div>
 
-        {/* Scan Line Overlay */}
         <div className="scan-line opacity-10"></div>
 
-        {/* Background Image */}
         <img
           src="https://res.cloudinary.com/dw9dtsgdm/image/upload/v1769720242/background_otqv3z.jpg"
           alt="Overlay"
@@ -96,7 +83,7 @@ const Hero = () => {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        animate={isLoaded ? 'visible' : 'hidden'}
         className="relative z-10 text-center max-w-5xl mx-auto"
       >
         {/* Profile */}
@@ -110,10 +97,8 @@ const Hero = () => {
                 isLoaded ? 'opacity-100' : 'opacity-0'
               }`}
             />
-            {/* Scanning Bar */}
             <div className="absolute top-0 left-0 w-full h-1 bg-neon-blue/60 blur-[2px] animate-scan pointer-events-none group-hover:opacity-100 opacity-30 transition-opacity"></div>
           </div>
-          {/* Animated ring */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 border border-neon-blue/20 rounded-full animate-ping opacity-20"></div>
         </motion.div>
 
@@ -139,7 +124,7 @@ const Hero = () => {
 
         {/* Actions */}
         <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 items-center">
-          
+          <a
             href="/assets/resume/NoumanShakeel_resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -151,7 +136,7 @@ const Hero = () => {
           </a>
 
           <div className="flex gap-2 items-center glass-dark p-2 rounded-full border border-white/5 hover:border-neon-purple/30 transition-colors">
-            
+            <a
               href="https://github.com/Cs-NoumanShakeel"
               target="_blank"
               rel="noopener noreferrer"
@@ -159,7 +144,7 @@ const Hero = () => {
             >
               <Github size={22} className="group-hover:drop-shadow-[0_0_8px_#00f3ff]" />
             </a>
-            
+            <a
               href="http://www.linkedin.com/in/nouman-shakeel-214ab9361"
               target="_blank"
               rel="noopener noreferrer"
@@ -167,7 +152,7 @@ const Hero = () => {
             >
               <Linkedin size={22} className="group-hover:drop-shadow-[0_0_8px_#bc13fe]" />
             </a>
-            
+            <a
               href="mailto:noumannorm648@gmail.com"
               className="p-3 text-gray-400 hover:text-neon-pink hover:bg-neon-pink/5 rounded-full transition-all"
             >
