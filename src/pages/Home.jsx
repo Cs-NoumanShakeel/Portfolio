@@ -17,7 +17,8 @@ const Home = () => {
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.5 }}
                             className="flex items-center gap-3 text-neon-blue mb-4"
                         >
                             <div className="w-8 h-[1px] bg-neon-blue shadow-[0_0_10px_#00f3ff]"></div>
@@ -26,8 +27,8 @@ const Home = () => {
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ delay: 0.1, duration: 0.6 }}
                             className="text-4xl md:text-6xl font-display font-extrabold tracking-tight"
                         >
                             Building the Future of <br />
@@ -37,7 +38,8 @@ const Home = () => {
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.5 }}
                         className="text-gray-500 text-sm font-medium tracking-widest hidden md:block"
                     >
                         SCROLL TO EXPLORE — [ 01 / 04 ]
@@ -67,7 +69,8 @@ const Home = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.5 }}
                         className="inline-flex items-center gap-2 px-6 py-2 rounded-full glass border border-white/10 text-neon-blue text-[10px] uppercase tracking-[0.4em] font-bold mb-12 shadow-[0_0_20px_rgba(0,243,255,0.2)]"
                     >
                         <Zap size={14} className="fill-neon-blue" />
@@ -78,7 +81,7 @@ const Home = () => {
                     <motion.h2
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         className="text-5xl md:text-9xl font-display font-black mb-16 leading-[1.2] tracking-normal"
                     >
@@ -98,8 +101,8 @@ const Home = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ delay: 0.4, duration: 0.6 }}
                         className="flex flex-col items-center"
                     >
                         <p className="text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto mb-16 leading-relaxed">

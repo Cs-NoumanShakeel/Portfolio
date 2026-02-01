@@ -17,7 +17,8 @@ const TechStack = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.5 }}
                         className="flex items-center gap-3 text-neon-purple/70 mb-4"
                     >
                         <Terminal size={20} />
@@ -26,8 +27,8 @@ const TechStack = () => {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ delay: 0.1, duration: 0.6 }}
                         className="text-4xl md:text-6xl font-display font-extrabold tracking-tight"
                     >
                         A Technical <span className="text-white/40 italic">Arsenal</span> <br />
@@ -37,7 +38,8 @@ const TechStack = () => {
                 <motion.button
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5 }}
                     onClick={() => setShowAll(!showAll)}
                     className="px-8 py-3 glass rounded-full hover:bg-neon-purple/10 transition-all font-bold text-[10px] uppercase tracking-[0.2em] border border-white/5 hover:border-neon-purple/30 group"
                 >
@@ -55,7 +57,7 @@ const TechStack = () => {
                             exit={{ opacity: 0, scale: 0.95 }}
                             transition={{ duration: 0.4 }}
                             whileHover={{ y: -5, borderColor: 'rgba(188, 19, 254, 0.4)' }}
-                            className="glass-dark p-8 rounded-[2rem] border border-white/5 hover:bg-white/[0.02] transition-colors relative overflow-hidden group"
+                            className="glass-dark p-8 rounded-[2rem] border border-white/5 hover:bg-white/[0.02] transition-colors relative overflow-hidden group will-change-transform"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-neon-purple/5 rounded-full blur-3xl group-hover:bg-neon-purple/10 transition-colors"></div>
 

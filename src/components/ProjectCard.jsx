@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Cpu } from 'lucide-react';
@@ -7,7 +7,18 @@ import { isEmbedType } from '../utils/video';
 const ProjectCard = ({ project, index }) => {
     const navigate = useNavigate();
     const cardRef = useRef(null);
+    const videoRef = useRef(null);
     const useEmbed = project.videoType && isEmbedType(project.videoType);
+
+    useEffect(() => {
+        // Ensure video plays immediately when loaded
+        if (videoRef.current && project.isVideo) {
+            videoRef.current.play().catch(err => {
+                // Autoplay might be blocked, but video will play on user interaction
+                console.log('Autoplay prevented:', err);
+            });
+        }
+    }, [project.isVideo]);
 
     return (
         <motion.div
@@ -32,12 +43,17 @@ const ProjectCard = ({ project, index }) => {
                     />
                 ) : project.isVideo ? (
                     <video
+                        ref={videoRef}
                         src={project.video}
                         autoPlay
                         loop
                         muted
                         playsInline
                         preload="auto"
+                        onLoadedData={(e) => {
+                            // Force play as soon as video data is loaded
+                            e.target.play().catch(() => { });
+                        }}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out will-change-transform"
                     />
                 ) : (

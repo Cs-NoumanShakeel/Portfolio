@@ -8,7 +8,8 @@ const Education = () => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5 }}
                     className="inline-flex items-center gap-2 px-4 py-1 rounded-full glass border border-white/5 text-neon-blue/80 text-[10px] uppercase tracking-[0.3em] font-bold mb-6 shadow-md"
                 >
                     <GraduationCap size={14} className="animate-pulse" />
@@ -17,8 +18,8 @@ const Education = () => {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: 0.1, duration: 0.6 }}
                     className="text-4xl md:text-6xl font-display font-extrabold"
                 >
                     Forging the <span className="text-neon-blue/70">Next Generation</span> <br />
@@ -33,9 +34,9 @@ const Education = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="glass-dark p-10 md:p-16 rounded-[3rem] border border-white/5 relative z-10 shadow-2xl overflow-hidden group/main"
+                    className="glass-dark p-10 md:p-16 rounded-[3rem] border border-white/5 relative z-10 shadow-2xl overflow-hidden group/main will-change-transform"
                 >
                     {/* Cyberpunk grid overlay for the card */}
                     <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(rgba(0,243,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,243,255,0.2)_1px,transparent_1px)] bg-[size:20px_20px]"></div>

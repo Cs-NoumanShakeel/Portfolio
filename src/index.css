@@ -8,6 +8,12 @@
   color-scheme: dark;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  /* Account for fixed navbar */
+}
+
 body {
   background-color: #000000;
   @apply text-white font-sans antialiased;

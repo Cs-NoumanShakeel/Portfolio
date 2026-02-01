@@ -1,47 +1,16 @@
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
     const containerRef = useRef(null);
-    const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.1,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { y: 40, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-        },
-    };
-
-    const profileVariants = {
-        hidden: { scale: 0.8, opacity: 0, rotate: -10 },
-        visible: {
-            scale: 1,
-            opacity: 1,
-            rotate: 0,
-            transition: {
-                duration: 0.6,
-                ease: "easeOut",
-                delay: 0
-            },
-        },
-    };
+    useEffect(() => {
+        // Trigger component animations shortly after mount
+        const timer = setTimeout(() => setIsLoaded(true), 100);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <section
@@ -49,68 +18,61 @@ const Hero = () => {
             className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 overflow-hidden bg-pitch"
         >
             {/* Holographic Background Elements */}
-            <motion.div
-                style={{ y: y1, opacity }}
-                className="absolute inset-0 z-0 will-change-composite"
+            <div
+                className={`absolute inset-0 z-0 will-change-opacity transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             >
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neon-blue/10 rounded-full blur-[120px] animate-pulse"></div>
-                <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-neon-purple/10 rounded-full blur-[100px] animate-pulse [animation-delay:1s]"></div>
-                <div className="absolute top-[20%] right-[10%] w-[20%] h-[20%] bg-neon-green/5 rounded-full blur-[80px] animate-pulse [animation-delay:2s]"></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neon-blue/5 rounded-full blur-[120px] animate-pulse"></div>
+                <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-neon-purple/5 rounded-full blur-[100px] animate-pulse [animation-delay:1s]"></div>
 
                 {/* Scan Line Overlay */}
-                <div className="scan-line opacity-10"></div>
+                <div className="scan-line opacity-5"></div>
 
                 <img
                     src="https://res.cloudinary.com/dw9dtsgdm/image/upload/v1769720242/background_otqv3z.jpg"
                     alt="Overlay"
-                    loading="eager"
-                    className="w-full h-full object-cover opacity-10 mix-blend-overlay"
+                    loading="lazy"
+                    className="w-full h-full object-cover opacity-5 mix-blend-overlay"
                 />
-            </motion.div>
+            </div>
 
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate={isLoaded ? 'visible' : 'hidden'}
-                className="relative z-10 text-center max-w-5xl mx-auto"
+            <div
+                className={`relative z-10 text-center max-w-5xl mx-auto transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             >
-                <motion.div variants={profileVariants} className="mb-10 relative inline-block">
+                <div className={`mb-10 relative inline-block transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
                     <div className="relative z-10 w-44 h-44 mx-auto rounded-full p-[2px] bg-gradient-to-tr from-neon-blue/40 via-neon-purple/40 to-neon-pink/40 border border-white/5 overflow-hidden group">
                         <div className="absolute inset-0 bg-pitch rounded-full group-hover:scale-95 transition-transform duration-700 ease-out"></div>
                         <img
                             src="https://res.cloudinary.com/dw9dtsgdm/image/upload/v1769720239/profile_govxcr.jpg"
                             alt="Nouman Mujahid"
                             fetchPriority="high"
-                            onLoad={() => setIsLoaded(true)}
-                            className={`relative z-10 w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-opacity duration-500 group-hover:scale-110 will-change-transform ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            onLoad={() => setImageLoaded(true)}
+                            className={`relative z-10 w-full h-full object-cover rounded-full filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110 will-change-transform ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                         />
                         {/* Scanning bar for profile */}
                         <div className="absolute top-0 left-0 w-full h-1 bg-neon-blue/60 blur-[2px] animate-scan pointer-events-none group-hover:opacity-100 opacity-30 transition-opacity"></div>
                     </div>
                     {/* Animated rings around profile with neon */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 border border-neon-blue/20 rounded-full animate-ping opacity-20"></div>
-                </motion.div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 border border-neon-blue/20 rounded-full animate-ping opacity-10"></div>
+                </div>
 
-                <motion.div variants={itemVariants} className="mb-6 pt-10 relative">
+                <div className={`mb-6 pt-10 relative transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-neon-blue/30 to-transparent"></div>
                     <h1 className="text-6xl md:text-9xl font-display font-black mb-4 tracking-tighter leading-[0.85] text-gray-300">
                         Nouman <br /> <span className=" text-gray-300 border-b border-white/5">Mujahid</span>
                     </h1>
-                </motion.div>
+                </div>
 
-                <motion.h2
-                    variants={itemVariants}
-                    className="text-xl md:text-2xl font-display text-gray-400 mb-10 tracking-wide max-w-2xl mx-auto font-light"
+                <h2
+                    className={`text-xl md:text-2xl font-display text-gray-400 mb-10 tracking-wide max-w-2xl mx-auto font-light transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                 >
                     Engineering <span className="text-neon-blue font-medium italic underline decoration-neon-blue/40 underline-offset-8">Intelligent</span> Web Architectures at the intersection of AI & Design.
-                </motion.h2>
+                </h2>
 
-                <motion.div
-                    variants={itemVariants}
-                    className="flex flex-wrap justify-center gap-6 items-center"
+                <div
+                    className={`flex flex-wrap justify-center gap-6 items-center transition-all duration-700 delay-900 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                 >
                     <a
-                        href="/assets/resume/NoumanMujahid_resume.pdf"
+                        href="/assets/resume/NoumanShakeel_resume.pdf"
                         target="_blank"
                         className="group relative px-10 py-4 bg-white text-pitch font-bold rounded-full overflow-hidden transition-all hover:pr-14 active:scale-95 shadow-lg"
                     >
@@ -130,18 +92,16 @@ const Hero = () => {
                             <Mail size={22} className="group-hover:drop-shadow-[0_0_8px_#ff00ff]" />
                         </a>
                     </div>
-                </motion.div>
-            </motion.div>
+                </div>
+            </div>
 
             {/* Floating Cybernetic Marker */}
-            <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40"
+            <div
+                className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000 delay-[1.2s] ${isLoaded ? 'opacity-40 animate-bounce' : 'opacity-0'}`}
             >
                 <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-gray-500">Scroll down</span>
                 <div className="w-[1px] h-12 bg-gradient-to-b from-gray-500 to-transparent opacity-30"></div>
-            </motion.div>
+            </div>
 
             {/* Cyberpunk grid background overlay */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(rgba(0,243,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,243,255,0.2)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
