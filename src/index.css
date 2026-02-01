@@ -18,6 +18,9 @@ body {
   background-color: #000000;
   @apply text-white font-sans antialiased;
   overflow-x: hidden;
+  /* Optimize scrolling performance */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   background-image:
     radial-gradient(circle at 10% 10%, rgba(0, 210, 255, 0.03) 0%, transparent 40%),
     radial-gradient(circle at 90% 90%, rgba(157, 80, 187, 0.03) 0%, transparent 40%),

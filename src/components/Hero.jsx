@@ -72,7 +72,7 @@ const Hero = () => {
                     className={`flex flex-wrap justify-center gap-6 items-center transition-all duration-700 delay-900 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                 >
                     <a
-                        href="/assets/resume/NoumanShakeel_resume.pdf"
+                        href="/assets/resume/NoumanMujahid_resume.pdf"
                         target="_blank"
                         className="group relative px-10 py-4 bg-white text-pitch font-bold rounded-full overflow-hidden transition-all hover:pr-14 active:scale-95 shadow-lg"
                     >

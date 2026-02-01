@@ -21,6 +21,25 @@ const Navbar = () => {
         { name: 'Academic', href: '/#education' },
     ];
 
+    const handleSmoothScroll = (e, href) => {
+        e.preventDefault();
+        const targetId = href.replace('/#', '');
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            const navbarHeight = 100; // Account for fixed navbar
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Close mobile menu if open
+        setIsOpen(false);
+    };
+
     return (
         <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled ? 'py-4 px-6 md:px-12' : 'py-8 px-6 md:px-12'
             }`}>
@@ -38,6 +57,7 @@ const Navbar = () => {
                             <a
                                 key={link.name}
                                 href={link.href}
+                                onClick={(e) => handleSmoothScroll(e, link.href)}
                                 className="text-xs uppercase tracking-[0.3em] font-bold text-gray-400 hover:text-white transition-all relative group"
                             >
                                 {link.name}
@@ -78,7 +98,7 @@ const Navbar = () => {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => handleSmoothScroll(e, link.href)}
                                     className="text-3xl font-display font-bold text-white border-b border-white/5 pb-4"
                                 >
                                     {link.name}
